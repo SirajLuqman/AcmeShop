@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop - Acme Shop</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+
+<header role="banner">
+  <div class="topbar container">
+    <div class="brand">
+      <img src="assets/img/logo.png" alt="Acme Shop Logo">
+      <a href="index.html">Acme Shop</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" aria-label="Primary Navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="cart.html" aria-label="Cart">Cart <span id="cartCount" class="badge" aria-live="polite">0</span></a>
+    </nav>
+  </div>
+</header>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+  <main id="main" class="container">
+    <h1>Shop</h1>
+    <p>Explore our curated selection of products and add your favorites to the cart.</p>
+
+    <label for="filter">Filter by category</label>
+    <select id="filter" aria-label="Filter products">
+      <option value="all">All</option>
+      <option value="apparel">Apparel</option>
+      <option value="gadgets">Gadgets</option>
+      <option value="home">Home</option>
+    </select>
+
+    <div id="products" class="grid grid-3" role="list">
+      <article class="card product-card" data-category="apparel" role="listitem">
+        <img src="assets/img/shirt.png" alt="Classic T-Shirt">
+        <h3>Classic T‑Shirt</h3>
+        <p class="price">$19.99</p>
+        <button data-add-to-cart data-id="p1" aria-label="Add Classic T‑Shirt to cart">Add to Cart</button>
+      </article>
+      <article class="card product-card" data-category="gadgets" role="listitem">
+        <img src="assets/img/earbuds.png" alt="Wireless Earbuds">
+        <h3>Wireless Earbuds</h3>
+        <p class="price">$59.99</p>
+        <button data-add-to-cart data-id="p2" aria-label="Add Wireless Earbuds to cart">Add to Cart</button>
+      </article>
+      <article class="card product-card" data-category="home" role="listitem">
+        <img src="assets/img/mug.png" alt="Ceramic Mug">
+        <h3>Ceramic Mug</h3>
+        <p class="price">$12.00</p>
+        <button data-add-to-cart data-id="p3" aria-label="Add Ceramic Mug to cart">Add to Cart</button>
+      </article>
+      <article class="card product-card" data-category="gadgets" role="listitem">
+        <img src="assets/img/watch.png" alt="Smartwatch">
+        <h3>Smartwatch</h3>
+        <p class="price">$129.00</p>
+        <button data-add-to-cart data-id="p4" aria-label="Add Smartwatch to cart">Add to Cart</button>
+      </article>
+      <article class="card product-card" data-category="apparel" role="listitem">
+        <img src="assets/img/hoodie.png" alt="Hoodie">
+        <h3>Cozy Hoodie</h3>
+        <p class="price">$39.00</p>
+        <button data-add-to-cart data-id="p5" aria-label="Add Cozy Hoodie to cart">Add to Cart</button>
+      </article>
+      <article class="card product-card" data-category="home" role="listitem">
+        <img src="assets/img/plant.png" alt="Desk Plant">
+        <h3>Desk Plant</h3>
+        <p class="price">$16.50</p>
+        <button data-add-to-cart data-id="p6" aria-label="Add Desk Plant to cart">Add to Cart</button>
+      </article>
+    </div>
+  </main>
+
+<footer role="contentinfo">
+  <div class="container footer-grid">
+    <div>
+      <h3>Acme Shop</h3>
+      <p>Your trusted destination for quality electronics and fashion at fair prices, designed to bring style and value together.</p>
+      <p>Email: <a href="mailto:hello@acmeshop.example">hello@acmeshop.com</a></p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <p><a href="about.html">About</a></p>
+      <p><a href="shop.html">Shop</a></p>
+      <p><a href="contact.html">Contact</a></p>
+      <p><a href="privacy.html">Privacy & Ethics</a></p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p><a href="#" aria-label="Facebook">Facebook</a> · <a href="#" aria-label="Instagram">Instagram</a></p>
+      <p><small>© 2025 Acme Shop. All rights reserved.</small></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

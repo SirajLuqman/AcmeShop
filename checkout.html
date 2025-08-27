@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acme Shop - Checkout</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+  <style>
+    /* Quick inline styling for checkout layout */
+    #checkout-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    #cart-section, #checkout-form-section {
+      flex: 1 1 300px;
+    }
+    .product-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .product-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
+    .card-details {
+      display: none; /* show only if payment = card */
+      margin-top: 1rem;
+    }
+    .card-details input {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+    }
+    select {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+    /* Popup Styles */
+    #thankYouPopup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #thankYouPopup .popup-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    #thankYouPopup button {
+      margin-top: 1rem;
+      padding: .6rem 1rem;
+      background: #4a148c;
+      color: #fff;
+      border: none;
+      border-radius: .5rem;
+      cursor: pointer;
+    }
+    #thankYouPopup button:hover {
+      background: #380d66;
+    }
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="topbar container">
+    <div class="brand">
+      <img src="assets/img/logo.png" alt="Acme Shop Logo">
+      <a href="index.html">Acme Shop</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" aria-label="Primary Navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="cart.html" aria-label="Cart">Cart <span id="cartCount" class="badge" aria-live="polite">0</span></a>
+    </nav>
+  </div>
+</header>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<main id="main" class="container">
+  <h1>Checkout</h1>
+
+  <div id="checkout-container">
+    <!-- Order Summary Section -->
+    <section id="cart-section">
+      <h2>Your Cart</h2>
+      <div id="cart-items">
+        <!-- Cart items will be injected here by JS -->
+      </div>
+      <p id="cart-total" style="font-weight:bold; margin-top:1rem;">Total: $0.00</p>
+    </section>
+
+    <!-- Billing & Payment Form -->
+    <section id="checkout-form-section">
+      <h2>Billing & Shipping Information</h2>
+      <form id="checkoutForm">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="address" placeholder="Street Address" required>
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="state" placeholder="State/Province" required>
+        <input type="text" name="zip" placeholder="ZIP/Postal Code" required>
+
+        <!-- Payment Method Dropdown -->
+        <h3>Choose Payment Method</h3>
+        <select id="paymentMethod" required>
+          <option value="">-- Select Payment Method --</option>
+          <option value="card">Debit Card</option>
+          <option value="cod">Cash on Delivery</option>
+        </select>
+
+        <!-- Card Details Block -->
+        <div class="card-details" id="card-details">
+          <input type="text" name="cardName" placeholder="Cardholder Name">
+          <input type="text" name="cardNumber" placeholder="Card Number">
+          <input type="text" name="expiry" placeholder="MM/YY">
+          <input type="text" name="cvv" placeholder="CVV">
+        </div>
+
+        <button type="submit" class="primary">Place Order</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Thank You Popup -->
+  <div id="thankYouPopup">
+    <div class="popup-content">
+      <h2>Thank You!</h2>
+      <p>Your order has been placed successfully.</p>
+      <button onclick="window.location.href='shop.html'">Continue Shopping</button>
+    </div>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="container footer-grid">
+    <div>
+      <h3>Acme Shop</h3>
+      <p>Your trusted destination for quality electronics and fashion at fair prices, designed to bring style and value together.</p>
+      <p>Email: <a href="mailto:hello@acmeshop.com">hello@acmeshop.com</a></p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <p><a href="about.html">About</a></p>
+      <p><a href="shop.html">Shop</a></p>
+      <p><a href="contact.html">Contact</a></p>
+      <p><a href="privacy.html">Privacy & Ethics</a></p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p><a href="#" aria-label="Facebook">Facebook</a> · <a href="#" aria-label="Instagram">Instagram</a></p>
+      <p><small>© 2025 Acme Shop. All rights reserved.</small></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const products = {
+  p1: {name: "Classic T-Shirt", price: 19.99, img: "assets/img/shirt.png"},
+  p2: {name: "Wireless Earbuds", price: 59.99, img: "assets/img/earbuds.png"},
+  p3: {name: "Ceramic Mug", price: 12.00, img: "assets/img/mug.png"},
+  p4: {name: "Smartwatch", price: 129.00, img: "assets/img/watch.png"},
+  p5: {name: "Cozy Hoodie", price: 39.00, img: "assets/img/hoodie.png"},
+  p6: {name: "Desk Plant", price: 16.50, img: "assets/img/plant.png"}
+};
+
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart')) || {};
+}
+
+function updateCartCount() {
+  const cart = getCart();
+  let count = 0;
+  for (let key in cart) {
+    if (cart.hasOwnProperty(key)) count += cart[key];
+  }
+  const badge = document.getElementById('cartCount');
+  if (badge) badge.textContent = count;
+}
+
+function renderCart() {
+  const cart = getCart();
+  const container = document.getElementById('cart-items');
+  container.innerHTML = '';
+  let total = 0;
+
+  if (Object.keys(cart).length === 0) {
+    container.innerHTML = '<p>Your cart is empty.</p>';
+  } else {
+    for (let id in cart) {
+      if (cart.hasOwnProperty(id)) {
+        const quantity = cart[id];
+        const prod = products[id];
+        if (!prod) continue;
+
+        const subtotal = quantity * prod.price;
+        total += subtotal;
+
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `
+          <img src="${prod.img}" alt="${prod.name}">
+          <div>
+            <h3>${prod.name}</h3>
+            <p>Quantity: ${quantity}</p>
+            <p>Price: $${prod.price.toFixed(2)}</p>
+            <p>Subtotal: $${subtotal.toFixed(2)}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      }
+    }
+  }
+  document.getElementById('cart-total').textContent = `Total: $${total.toFixed(2)}`;
+}
+
+/* ===== Payment Method Dropdown Toggle ===== */
+const paymentSelect = document.getElementById('paymentMethod');
+const cardDetails = document.getElementById('card-details');
+
+paymentSelect.addEventListener('change', () => {
+  if (paymentSelect.value === 'card') {
+    cardDetails.style.display = 'block';
+  } else {
+    cardDetails.style.display = 'none';
+  }
+});
+
+/* ===== Handle Checkout Form Submission ===== */
+const checkoutForm = document.getElementById('checkoutForm');
+checkoutForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(checkoutForm);
+  const paymentMethod = paymentSelect.value;
+
+  if (!paymentMethod) {
+    alert('Please select a payment method.');
+    return;
+  }
+
+  // Show popup
+  document.getElementById('thankYouPopup').style.display = 'flex';
+
+  // Clear cart and reset form
+  localStorage.removeItem('cart');
+  renderCart();
+  checkoutForm.reset();
+  updateCartCount();
+  cardDetails.style.display = 'none';
+});
+
+/* ===== Initial Render ===== */
+renderCart();
+updateCartCount();
+</script>
+
+</body>
+</html>

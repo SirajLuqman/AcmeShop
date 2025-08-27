@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact - Acme Shop</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+
+<header role="banner">
+  <div class="topbar container">
+    <div class="brand">
+      <img src="assets/img/logo.png" alt="Acme Shop Logo">
+      <a href="index.html">Acme Shop</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" aria-label="Primary Navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="cart.html" aria-label="Cart">Cart <span id="cartCount" class="badge" aria-live="polite">0</span></a>
+    </nav>
+  </div>
+</header>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+  <main id="main" class="container">
+  <h1>Contact Us</h1>
+
+  <!-- Contact Form -->
+  <section aria-labelledby="form-title">
+    <h2 id="form-title">Send a Message</h2>
+    <form id="contactForm" aria-describedby="form-help">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Enter your full name" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="Enter your email address" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+
+      <button class="primary" type="submit">Send</button>
+      <p id="form-help"><small>We never share your data. See our <a href="privacy.html#privacy">privacy policy</a>.</small></p>
+    </form>
+  </section>
+
+  <!-- Contact Info -->
+  <section aria-labelledby="address-title" class="container">
+    <h2 id="address-title">Our Address</h2>
+    <div class="card">
+      <p><strong>Acme Shop</strong></p>
+      <p>3500, Jalan Teknokrat 3,<br>
+         Cyber 4, 63000 Cyberjaya,<br>
+         Selangor Darul Ehsan, Malaysia.</p>
+      <p><strong>Email:</strong> <a href="mailto:hello@acmeshop.example">hello@acmeshop.example</a></p>
+    </div>
+  </section>
+
+  <!-- Google Map -->
+  <section aria-labelledby="map-title" class="container">
+    <h2 id="map-title">Find Us</h2>
+    <div class="card" role="region" aria-label="Map">
+      <iframe
+        title="Acme Shop Location Map"
+        width="100%"
+        height="300"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7964.998445!2d101.6455!3d2.9254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb6a9d2d1a5a7%3A0x7b9cf18917d5725!2sCyberjaya%2C%20Selangor!5e0!3m2!1sen!2smy!4v1690000000000">
+      </iframe>
+    </div>
+  </section>
+</main>
+
+
+<footer role="contentinfo">
+  <div class="container footer-grid">
+    <div>
+      <h3>Acme Shop</h3>
+      <p>Quality goods, fair prices. Built as an assignment-friendly e‑commerce skeleton.</p>
+      <p>Email: <a href="mailto:hello@acmeshop.com">hello@acmeshop.com</a></p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <p><a href="about.html">About</a></p>
+      <p><a href="shop.html">Shop</a></p>
+      <p><a href="contact.html">Contact</a></p>
+      <p><a href="privacy.html">Privacy & Ethics</a></p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p><a href="#" aria-label="Facebook">Facebook</a> · <a href="#" aria-label="Instagram">Instagram</a></p>
+      <p><small>© 2025 Acme Shop. All rights reserved.</small></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

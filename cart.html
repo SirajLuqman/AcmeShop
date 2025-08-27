@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart - Acme Shop</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+
+<header role="banner">
+  <div class="topbar container">
+    <div class="brand">
+      <img src="assets/img/logo.png" alt="Acme Shop Logo">
+      <a href="index.html">Acme Shop</a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" aria-label="Primary Navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="shop.html">Shop</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="cart.html" aria-label="Cart">Cart <span id="cartCount" class="badge" aria-live="polite">0</span></a>
+    </nav>
+  </div>
+</header>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<main id="main" class="container">
+  <h1>Your Cart</h1>
+  <p>Review your selected items, adjust quantities, or remove products before checkout.</p>
+
+  <div id="cartStatus" style="display:none;">
+    <p>Your cart is empty. <a href="shop.html">Start shopping!</a></p>
+  </div>
+
+  <div class="cart-grid">
+    <div class="cart-header grid grid-5">
+      <div>Product</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div>Total</div>
+      <div>Action</div>
+    </div>
+  </div>
+
+  <div class="cart-summary" style="text-align:right; margin-top:20px;">
+    <p><strong>Total: $0.00</strong></p>
+    <button id="checkoutBtn" type="button" class="primary">Proceed to Checkout</button>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="container footer-grid">
+    <div>
+      <h3>Acme Shop</h3>
+      <p>Your trusted destination for quality electronics and fashion at fair prices, designed to bring style and value together.</p>
+      <p>Email: <a href="mailto:hello@acmeshop.example">hello@acmeshop.com</a></p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <p><a href="about.html">About</a></p>
+      <p><a href="shop.html">Shop</a></p>
+      <p><a href="contact.html">Contact</a></p>
+      <p><a href="privacy.html">Privacy & Ethics</a></p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p><a href="#" aria-label="Facebook">Facebook</a> · <a href="#" aria-label="Instagram">Instagram</a></p>
+      <p><small>© 2025 Acme Shop. All rights reserved.</small></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Get cart from localStorage
+const cartContainer = document.querySelector('.cart-grid');
+let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+// Product catalog
+const products = {
+  p1: {name: "Classic T-Shirt", price: 19.99, img: "assets/img/shirt.png"},
+  p2: {name: "Wireless Earbuds", price: 59.99, img: "assets/img/earbuds.png"},
+  p3: {name: "Ceramic Mug", price: 12.00, img: "assets/img/mug.png"},
+  p4: {name: "Smartwatch", price: 129.00, img: "assets/img/watch.png"},
+  p5: {name: "Cozy Hoodie", price: 39.00, img: "assets/img/hoodie.png"},
+  p6: {name: "Desk Plant", price: 16.50, img: "assets/img/plant.png"}
+};
+
+// Function to render cart items
+function renderCart() {
+  const cartStatusDiv = document.getElementById('cartStatus');
+  const cartSummaryDiv = document.querySelector('.cart-summary');
+
+  cartContainer.querySelectorAll('.cart-item').forEach(item => item.remove());
+  let total = 0;
+
+  if (Object.keys(cart).length === 0) {
+    cartStatusDiv.style.display = 'block';
+    cartSummaryDiv.style.display = 'none';
+    cartContainer.style.display = 'none';
+  } else {
+    cartStatusDiv.style.display = 'none';
+    cartSummaryDiv.style.display = 'block';
+    cartContainer.style.display = 'grid';
+
+    for (const id in cart) {
+      const qty = cart[id];
+      const prod = products[id];
+      if (!prod) continue;
+
+      const subtotal = prod.price * qty;
+      total += subtotal;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('cart-item', 'grid', 'grid-5');
+      itemDiv.dataset.id = id;
+      itemDiv.innerHTML = `
+        <div class="product-name">
+          <img src="${prod.img}" alt="${prod.name}" width="50">
+          ${prod.name}
+        </div>
+        <div class="product-price">$${prod.price.toFixed(2)}</div>
+        <div>
+          <input type="number" min="1" value="${qty}" class="qty-input" aria-label="Quantity">
+        </div>
+        <div class="product-total">$${subtotal.toFixed(2)}</div>
+        <div><button class="remove-btn" aria-label="Remove ${prod.name}">Remove</button></div>
+      `;
+      cartContainer.appendChild(itemDiv);
+    }
+  }
+
+  document.querySelector('.cart-summary strong').textContent = `Total: $${total.toFixed(2)}`;
+}
+
+// Handle quantity changes and remove actions
+cartContainer.addEventListener('input', e => {
+  if (e.target.classList.contains('qty-input')) {
+    const parent = e.target.closest('.cart-item');
+    const id = parent.dataset.id;
+    cart[id] = parseInt(e.target.value);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+});
+
+cartContainer.addEventListener('click', e => {
+  if (e.target.classList.contains('remove-btn')) {
+    const parent = e.target.closest('.cart-item');
+    const id = parent.dataset.id;
+    delete cart[id];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+});
+
+// Initial render
+renderCart();
+</script>
+
+</body>
+</html>
